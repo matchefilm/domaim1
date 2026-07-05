@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即将跳转 - MatcheFilm</title>
+    <style>
+
+        * {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #ffdfe8 0%, #ffc2d6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景装饰 */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: #ff8fab;
+            opacity: 0.3;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* 主容器 */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(255, 143, 171, 0.3);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 卡通标签 */
+        .cartoon-banner {
+            background: linear-gradient(135deg, #ff8fab 0%, #ff6b9c 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 143, 171, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cartoon-banner::before {
+            content: "✨";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .cartoon-banner::after {
+            content: "💫";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            animation: float 2s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(10px); }
+        }
+        /* 标题 */
+        h1 {
+            color: #ff6b9c;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(255, 143, 171, 0.3);
+        }
+
+        /* 信息表格 */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 143, 171, 0.2);
+        }
+
+        .info-table th {
+            background: linear-gradient(135deg, #ff8fab 0%, #ff6b9c 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .info-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ffe0ec;
+        }
+
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-table tr:hover {
+            background: #fff5f8;
+            transition: background 0.3s ease;
+        }
+
+        /* 链接样式 */
+        .link {
+            color: #ff6b9c;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            padding: 2px 0;
+        }
+
+        .link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #ff8fab 0%, #ff6b9c 100%);
+            transition: width 0.3s ease;
+        }
+
+        .link:hover::after {
+            width: 100%;
+        }
+
+        .link:hover {
+            color: #ff4757;
+        }
+
+        /* 跳转提示 */
+        .redirect-notice {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff5f8;
+            border-radius: 10px;
+            border: 2px dashed #ff8fab;
+        }
+
+        .countdown {
+            font-size: 24px;
+            color: #ff6b9c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* 装饰元素 */
+        .mascot {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            font-size: 80px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+            z-index: 0;
+        }
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .cartoon-banner {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration">
+        <div class="star" style="top: 10%; left: 10%;">✨</div>
+        <div class="star" style="top: 20%; right: 20%; animation-delay: 0.5s;">🌟</div>
+        <div class="star" style="bottom: 30%; left: 20%; animation-delay: 1s;">💫</div>
+        <div class="star" style="bottom: 20%; right: 10%; animation-delay: 1.5s;">✨</div>
+        <div class="star" style="top: 50%; left: 5%; animation-delay: 2s;">💫</div>
+        <div class="star" style="top: 60%; right: 5%; animation-delay: 2.5s;">⭐</div>
+    </div>
+
+    <div class="container">
+        <div class="mascot">💫</div>
+        
+        <div class="cartoon-banner">
+            该演示站点已在 2025-10-8 关闭，即将进行跳转
+        </div>
+
+        <h1>🎨 MatcheFilm 站点信息</h1>
+
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>信息</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🎬 作者</td>
+                    <td><a href="https://space.bilibili.com/1693452988" target="_blank" class="link">MatcheFilm</a></td>
+                </tr>
+                <tr>
+                    <td>🏠 博客</td>
+                    <td><a href="https://www.srcdot.com/" target="_blank" class="link">www.srcdot.com</a></td>
+                </tr>
+                <tr>
+                    <td>📺 视频教程</td>
+                    <td><a href="https://www.bilibili.com/video/BV1NqaRzbESt/" target="_blank" class="link">【二级域名分发系统搭建及配置全流程演示】</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="redirect-notice">
+            <p>页面将在 <span class="countdown" id="countdown">5</span> 秒后自动跳转</p>
+            <p>如果未能自动跳转，请点击上方链接手动访问</p>
+        </div>
+    </div>
+
+    <script>
+        // 倒计时跳转
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                // 跳转到目标页面
+                window.location.href = 'https://www.rainyun.com/match_';
+            }
+        }, 1000);
+
+        // 添加页面加载动画
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
